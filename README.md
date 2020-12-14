@@ -1,1 +1,1 @@
-# twitter_political_analyzer
+Twitter Political Sentiment Analysis Portal
