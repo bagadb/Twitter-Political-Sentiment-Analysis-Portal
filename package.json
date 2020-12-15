@@ -1,0 +1,24 @@
+{
+  "name": "twitter-political-sentiment-analysis-portal",
+  "version": "1.0.0",
+  "description": "Twitter Political Analyzer POrtal!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bagadb/Twitter-Political-Sentiment-Analysis-Portal.git"
+  },
+  "author": "Shreyas Lolage, INdrajeet Garde, Shekhar Sable",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bagadb/Twitter-Political-Sentiment-Analysis-Portal/issues"
+  },
+  "homepage": "https://github.com/bagadb/Twitter-Political-Sentiment-Analysis-Portal#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "serve-favicon": "^2.5.0"
+  }
+}
