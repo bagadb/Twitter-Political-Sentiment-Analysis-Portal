@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --darkest:  #1a1c20;
+    --dark:     #cf7500;
+    --medium:   #f4f4f4;
+    --light:    #f0a500;
+}
+
+body {
+    background-color: var(--darkest);    
+}
+
+.loginpanel {
+    background-color: var(--dark);
+    color: var(--medium);
+    padding: 5vh;
+    border-radius: 1vh;
+}
+
+.loginbutton {
+    background-color: var(--darkest);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 1vh;
+}

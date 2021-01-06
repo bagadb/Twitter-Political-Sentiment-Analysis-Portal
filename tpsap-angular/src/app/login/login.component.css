@@ -1,0 +1,16 @@
+.loginpanel {
+    background-color: var(--dark);
+    color: var(--medium);
+    padding: 5vh;
+    border-radius: 1vh;
+}
+
+.loginbutton {
+    background-color: var(--darkest);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 1vh;
+}
