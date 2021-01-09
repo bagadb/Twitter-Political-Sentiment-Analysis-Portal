@@ -1,19 +1,19 @@
 <div class="container-fluid">
     <div class="row justify-content-center" style="height: 100vh;" >
-        <div class="col-4 align-self-center loginpanel">
+        <div class="col-12 col-md-4 align-self-center loginpanel">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 p-1">
                         <h1>Login!</h1>
                     </div>
                     <div class="col-12 p-1">
-                        Enter Username: <br><input type="text">
+                        Enter Username: <br><input [formControl]="username" type="text">
                     </div>
                     <div class="col-12 p-1">
-                        Password: <br><input type="password">
+                        Password: <br><input [formControl]="password" type="password">
                     </div>
                     <div class="col-12 p-1">
-                        <button class="loginbutton">Login</button>
+                        <button (click)="onSubmit()" class="loginbutton">Login</button>
                     </div>
                 </div>
             </div>

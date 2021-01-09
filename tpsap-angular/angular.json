@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tpsap-angular"
+    }
+  },
+  "defaultProject": "tpsap-angular",
+  "cli": {
+    "analytics": false
+  }
 }
