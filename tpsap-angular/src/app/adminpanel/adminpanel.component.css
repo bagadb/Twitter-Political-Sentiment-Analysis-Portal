@@ -1,0 +1,12 @@
+.fullpaneldiv {
+    background-color: var(--light);
+    padding: 1vh;
+}
+
+.tableofusers {
+    background-color: white;
+}
+
+.buttonclass {
+    margin-bottom: 0.5rem;
+}

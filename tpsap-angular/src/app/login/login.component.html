@@ -7,13 +7,13 @@
                         <h1>Login!</h1>
                     </div>
                     <div class="col-12 p-1">
-                        Enter Username: <br><input [formControl]="username" type="text">
+                        Enter Username: <br><input [formControl]="username" type="text" (keyup.enter) = "onSubmit($event)">
                     </div>
                     <div class="col-12 p-1">
-                        Password: <br><input [formControl]="password" type="password">
+                        Password: <br><input [formControl]="password" type="password" (keyup.enter) = "onSubmit($event)">
                     </div>
                     <div class="col-12 p-1">
-                        <button (click)="onSubmit()" class="loginbutton">Login</button>
+                        <button (click)="onSubmit($event)" (keyup.enter)="onSubmit($event)" class="loginbutton">Login</button>
                     </div>
                 </div>
             </div>

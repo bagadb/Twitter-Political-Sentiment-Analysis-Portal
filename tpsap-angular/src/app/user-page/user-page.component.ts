@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
+import { AdminpanelComponent } from '../adminpanel/adminpanel.component'
 
 @Component({
   selector: 'app-user-page',
@@ -8,11 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserPageComponent implements OnInit {
 
+  AdminLogin = false;
   loggedInUser: String
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       this.loggedInUser = params['username'];
+      if (this.loggedInUser == "admin"){
+        this.AdminLogin = true;
+      }
     });
    }
 

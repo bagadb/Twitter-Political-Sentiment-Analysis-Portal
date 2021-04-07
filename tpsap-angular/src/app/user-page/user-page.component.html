@@ -1,2 +1,7 @@
-<h1 style="color: white;">Welcome {{loggedInUser}}</h1>
+<h1>Welcome {{loggedInUser}}</h1>
+
 <a routerLink="/login">go back to login</a>
+<div class="container-fluid">
+    <app-adminpanel *ngIf="AdminLogin" class="row adminpanel"></app-adminpanel><br>
+    <app-querypanel class="row querypanel"></app-querypanel>
+</div>

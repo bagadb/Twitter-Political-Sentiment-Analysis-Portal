@@ -1,0 +1,11 @@
+<div class="col-12">
+    <h1>
+        Enter Query for Sentiment Analysis Below
+    </h1>
+</div>
+<div class="col-12">
+    <input type="text" style="width: 50%;" [formControl]="queryString" >&nbsp;
+    <button class="btn btn-primary" (click)="fireQuery()">
+        Fire
+    </button>
+</div>

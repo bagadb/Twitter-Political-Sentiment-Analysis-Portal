@@ -1,0 +1,39 @@
+<div class="col-12 fullpaneldiv">
+    <table class="table tableofusers">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of listOfUsers; let i = index">
+            <th scope="row" >{{i+1}}</th>
+            <td>{{user.username}}</td>
+            <td class="passwordclass">
+                {{user.password}}
+            </td>
+            <td>
+                <button type="button" class="buttonclass btn btn-primary">
+                    Delete
+                </button>
+            </td>
+            <tr>
+              <th scope="row" >{{ numberOfUsers }}</th>
+              <td>
+                <input type="text">
+              </td>
+              <td class="passwordclass">
+                  <input type="password">
+              <td>
+                  <button type="button" class="buttonclass btn btn-primary">
+                      Add
+                  </button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="buttonclass btn btn-primary">Save Changes</button>
+</div>

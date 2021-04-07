@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { from } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { LoginService } from './login.service'
 
@@ -21,17 +20,19 @@ export class LoginComponent implements OnInit {
 
   
   getAuth(username, password){
-    
     console.log("Sending\nUsername: '" + username + "'" + "\nPassword: '" + password + "'")
     this.LoginService.loginFunction(username, password).subscribe(data => {
       console.log(data)
       if (data == "OK") {
         this.router.navigate(['/portal',username]);
+      }else {
+        this.username.reset();
+        this.password.reset();
       }
     })
   }
   
-  onSubmit() {
+  onSubmit(event) {
     this.getAuth(this.username.value, this.password.value);
   }
 

@@ -38,10 +38,6 @@ User.find({},(error, data) => {
   }
 });
 
-function searchForLoginData(UserLoginDetails){
-  
-}
-
 dealer.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 
@@ -61,12 +57,13 @@ dealer.use(function(req, res, next) {
 
 dealer.use(bodyparser.text())
 
+
+// LOGIN FUNCTIONS
 dealer.get('/login/**', (req,res) => {
 })
 
 dealer.post('/login/**', (req, res) => {
   loginRequest = JSON.parse(req.body)
-  //console.log(loginRequest);
   User.findOne(loginRequest,(error, data) => {
     if(error){
       console.log(error);
@@ -82,6 +79,31 @@ dealer.post('/login/**', (req, res) => {
     }
   });
 })
+
+// ADMIN FUNCTIONS
+dealer.get('/adminfunctions', (req, res) => {
+  Userlist = User.find({},(error, data) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.send(data);
+      res.status(200).end();
+    }
+  })
+})
+
+dealer.post( '/adminfunctions', (req, res) => {
+
+})
+
+//QUERY FUNCTIONS
+
+dealer.post('/query',(req, res) => {
+  console.log("Someone sent a query!");
+})
+
+
+// SERVER 
 
 dealer.listen(port, () => {
   console.log(`API Started at http://localhost:${port}`)
