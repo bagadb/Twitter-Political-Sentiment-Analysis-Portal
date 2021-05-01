@@ -14,15 +14,31 @@ export class UserDataService {
         return this.http.get(this.ApiURL);
     }
 
-    modifyUserData() {
+    modifyUserData(username, password) {
+
+        var encodedUsername = btoa(username);
+
+        var encodedPassword = btoa(password);
+
+        return this.http.get(this.ApiURL + "/modify/" + encodedUsername + "-" + encodedPassword, { responseType: "text" });
 
     }
 
-    deleteUserData() {
+    deleteUserData(username) {
 
+        var encodedUsername = btoa(username);
+
+        return this.http.get(this.ApiURL + "/delete/" + encodedUsername, { responseType: "text" });
+    
     }
 
-    addNewUser() {
+    addNewUser(username, password) {
+
+        var encodedUsername = btoa(username);
+
+        var encodedPassword = btoa(password);
+        
+        return this.http.get(this.ApiURL + "/add/" + encodedUsername + "-" + encodedPassword, { responseType: "text" });
 
     }
     

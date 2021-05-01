@@ -5,7 +5,10 @@
             <th scope="col">#</th>
             <th scope="col">Username</th>
             <th scope="col">Password</th>
-            <th scope="col"></th>
+            <th scope="col">
+              <button type="button" class="buttonclass btn btn-primary" (click)="getUserData()">
+              Refresh
+              </button></th>
           </tr>
         </thead>
         <tbody>
@@ -16,19 +19,19 @@
                 {{user.password}}
             </td>
             <td>
-                <button type="button" class="buttonclass btn btn-primary">
+                <button type="button" class="buttonclass btn btn-primary" (click)="deleteUserData(user.username)">
                     Delete
                 </button>
             </td>
             <tr>
               <th scope="row" >{{ numberOfUsers }}</th>
               <td>
-                <input type="text">
+                <input type="text" [formControl]="newUsername">
               </td>
               <td class="passwordclass">
-                  <input type="password">
+                  <input type="password" [formControl]="newPassword">
               <td>
-                  <button type="button" class="buttonclass btn btn-primary">
+                  <button type="button" class="buttonclass btn btn-primary" (click)="addNewUser(newUsername.value, newPassword.value)">
                       Add
                   </button>
               </td>

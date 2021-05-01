@@ -14,6 +14,7 @@ import { UserPageComponent } from './user-page/user-page.component'
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { UserDataService } from './adminpanel/userdata.service'
 import { QuerypanelComponent } from './querypanel/querypanel.component';
+import { QueryService } from './querypanel/queryservice.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { QuerypanelComponent } from './querypanel/querypanel.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ LoginService, UserDataService ],
+  providers: [ LoginService, UserDataService, QueryService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

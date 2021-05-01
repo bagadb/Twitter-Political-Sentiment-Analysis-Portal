@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { QueryService } from './queryservice.service'
+
 @Component({
   selector: 'app-querypanel',
   templateUrl: './querypanel.component.html',
@@ -11,11 +13,17 @@ export class QuerypanelComponent implements OnInit {
 
   queryString = new FormControl('')
 
+  result: any;
+
   fireQuery(){
-    console.log(this.queryString.value)
+
+    this.QueryService.fireQueryandgetResponse(this.queryString.value).subscribe( data => {
+      this.result = data;
+      console.log(this.result);
+    });    
   }
 
-  constructor() { }
+  constructor(private QueryService: QueryService ) { }
 
   ngOnInit(): void {
   }
