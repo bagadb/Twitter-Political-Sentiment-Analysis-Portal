@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+/*font-family: 'Ubuntu', sans-serif;*/
 :root {
     --darkest:  #1a1c20;
     --dark:     #cf7500;
@@ -9,6 +12,8 @@
 body {
     background-color: var(--darkest);
     color: var(--medium);
+
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .loginpanel {

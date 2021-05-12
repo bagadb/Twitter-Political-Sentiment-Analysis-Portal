@@ -1,0 +1,22 @@
+/* MY NAVBAR */
+.bagadnavbar {
+    background-color: var(--darkest);
+    padding: 10px;
+
+    color: var(--light);
+}
+
+.bagadnavbar a{
+    color: white;
+}
+
+.bagadnavbar .disabled {
+    color: gray;
+}
+
+.header-text {
+    color: var(--light);
+}
+/* MY BUTTONS */
+
+/* MY TABLE */

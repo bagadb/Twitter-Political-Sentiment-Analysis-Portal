@@ -1,7 +1,34 @@
-<h1>Welcome {{loggedInUser}}</h1>
-
-<a routerLink="/login">go back to login</a>
+<nav class="navbar bagadnavbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">TPSaP</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngFor="let tab of listOfTabs; let i = index">
+            <a [ngClass]="selectedTab == i ? 'disabled': 'active'" class="nav-link" (click)="switchTab(i)" 
+            href="javascript:void(0)">
+                {{ tab  }}</a>
+        </li>
+        <!--
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Admin Panel</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Query Panel</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Query History</a>
+            </li>
+            <li class="nav-item pull-right">
+                <a class="nav-link" href="#">Log Out</a>
+            </li>
+        -->
+      </ul>
+    </div>
+  </nav>
+<h1>You are logged in as <span class="header-text">{{loggedInUser}}</span></h1>
 <div class="container-fluid">
-    <app-adminpanel *ngIf="AdminLogin" class="row adminpanel"></app-adminpanel><br>
-    <app-querypanel class="row querypanel"></app-querypanel>
+    <app-adminpanel *ngIf="selectedTab == 2" class="row adminpanel"></app-adminpanel><br>
+    <app-querypanel *ngIf="selectedTab == 0" class="row querypanel"></app-querypanel>
 </div>
