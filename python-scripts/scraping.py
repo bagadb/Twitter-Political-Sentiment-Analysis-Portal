@@ -10,17 +10,21 @@
 
 import sys
 import os
+import json
 
 import tweepy
 import pandas as pd
 
 #Keys for Authentication
 
+f = open('../../keys.json')
 
-consumer_key = os.environ['TPSAP_CK']
-consumer_secret= os.environ['TPSAP_CS']
-access_token = os.environ['TPSAP_AT']
-access_secret = os.environ['TPSAP_AS']
+keys = json.load(f)
+
+consumer_key = keys["TPSAP_CK"]
+consumer_secret = keys["TPSAP_CS"]
+access_token = keys["TPSAP_AT"]
+access_secret = keys["TPSAP_AS"]
 
 #Define Query
 print("---------------------------------------------------------------------------")
