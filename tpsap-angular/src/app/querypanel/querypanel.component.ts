@@ -41,7 +41,7 @@ export class QuerypanelComponent implements OnInit {
 
     var stringifiedObject = JSON.stringify(queryObject);
 
-    this.QueryService.fireQueryandgetResponse(btoa(stringifiedObject)).subscribe( data => {
+    this.QueryService.fireQueryandgetResponse(stringifiedObject).subscribe( data => {
     
     console.log(queryStringFinal);
     

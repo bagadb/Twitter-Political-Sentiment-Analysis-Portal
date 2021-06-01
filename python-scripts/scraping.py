@@ -7,16 +7,20 @@
 #
 
 # Import Libraries
+
 import sys
+import os
+
 import tweepy
 import pandas as pd
 
 #Keys for Authentication
 
-consumer_key ="5hF57DZyQoNet7KufOZBRy6l3"
-consumer_secret= "mcyIVlqjTnhyHf7eNbYJDFVtvd7Aa6sQ9juVikhR669i7IeEuH"
-access_token = "405425239-OL0bs4yCgUvoWIbkuVVz2EMOZAVApWwAOjuqb2jm"
-access_secret = "8JQhxIV2IHcQdm2I1847FkSy8h8XEwQGiUSJy8u1lXepU"
+
+consumer_key = os.environ['TPSAP_CK']
+consumer_secret= os.environ['TPSAP_CS']
+access_token = os.environ['TPSAP_AT']
+access_secret = os.environ['TPSAP_AS']
 
 #Define Query
 print("---------------------------------------------------------------------------")
@@ -79,7 +83,6 @@ for tweet in tweets:
     print(tweet)
     print("\n")
 
-sys.exit()
 #DataFrame stores data gathered
 
 df = pd.DataFrame({"text" : tweets})

@@ -2,6 +2,9 @@ const express = require("express");
 const bodyparser = require("body-parser");
 const mongoose = require('mongoose');
 
+const { exec } = require("child_process");
+
+
 // app_user
 // tpsappassword
 
@@ -180,16 +183,27 @@ dealer.get('/adminfunctions/add/:usernameb64-:passwordb64', (req, res) => {
 
 dealer.get('/queryprocessor/:queryslug',(req, res) => {
   console.log("Someone sent a query!");
+ 
+  var queryString = Buffer.from(req.params.queryslug, 'base64').toString();
 
-  var queryEncoded = req.params.queryslug;
+  console.log(queryString);
 
-  let bufferObj = Buffer.from(req.params.queryslug, "base64");
+  var queryObject = JSON.parse(queryString);
 
-  let decodedString = bufferObj.toString("utf8");
 
-  //var queryObject = JSON.parse(decodedString);
 
-  console.log(decodedString);
+
+  exec("python3 ./python-scripts/scraping.py",{env: {...process.env}}, (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+  })
   
   res.send("QUERY OK");
   res.status(200).end();
