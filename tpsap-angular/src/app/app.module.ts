@@ -15,6 +15,8 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { UserDataService } from './adminpanel/userdata.service'
 import { QuerypanelComponent } from './querypanel/querypanel.component';
 import { QueryService } from './querypanel/queryservice.service';
+import { TweetDisplayComponent } from './tweet-display/tweet-display.component';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,11 @@ import { QueryService } from './querypanel/queryservice.service';
     
     AdminpanelComponent,
     
-    QuerypanelComponent
+    QuerypanelComponent,
+    
+    TweetDisplayComponent,
+    
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
