@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Input, Component, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
@@ -10,9 +11,16 @@ export class TweetDisplayComponent implements OnInit {
 
   @Input() recievedTweets: string;
 
-  parsedTweets: any;
+  @Input() recievedSentimentScores: string;
 
+  @Input() recievedClassifierData: string;
+
+  parsedTweets: any;
   stringsFromTweets: string[];
+
+  parsedSentiments: any;
+
+  parsedClassifierData: string;
   
   fullView = true;
   buttonText = "-";
@@ -27,22 +35,28 @@ export class TweetDisplayComponent implements OnInit {
     }
   }
 
-  parseNewData(tweetsString){
+  parseNewData(){
 
     this.parsedTweets = JSON.parse(this.recievedTweets);
-    
-    
+
     this.stringsFromTweets = this.parsedTweets;
     
-    console.log(this.stringsFromTweets);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-        
-    this.parseNewData(changes.recievedTweets.currentValue);
 
-    // You can also use categoryId.previousValue and 
-    // categoryId.firstChange for comparing old and new values
+  ngOnChanges(changes: SimpleChanges) { 
+    
+    this.parseNewData();
+
+    this.parsedSentiments = JSON.parse(this.recievedSentimentScores);
+
+
+    var temp = this.recievedClassifierData.replace(/\\"/g, '"'); ;
+
+    this.parsedClassifierData = JSON.parse(temp.slice(1,-2));
+
+    console.log(this.parsedClassifierData);
+   
   }
   
   constructor() {

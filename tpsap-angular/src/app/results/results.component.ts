@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-results',
@@ -7,22 +7,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultsComponent implements OnInit {
 
-  title = 'Browser market shares at a specific website, 2014';
-   type = 'PieChart';
-   data = [
-      ['Firefox', 45.0],
-      ['IE', 26.8],
-      ['Chrome', 12.8],
-      ['Safari', 8.5],
-      ['Opera', 6.2],
-      ['Others', 0.7] 
-   ];
-   columnNames = ['Browser', 'Percentage'];
-   options = {    
-   };
-   width = 550;
-   height = 400;
-  
+  @Input() recievedAggregationData: string;
+
+  parsedAggregation: Object;
+
+  OP = 0; 
+  MP = 0;
+  MoP = 0;
+  SP = 0;
+  N = 0;
+  SN = 0;
+  MoN = 0;
+  MN = 0;
+  ON = 0;
+
+
+  dataString = "[" + this.OP + "," + this.MP + "," + this.MoP + "," + this.SP + "," + this.N + "," + this.SN + "," + this.MoN + "," + this.MN + "," + this.ON + "]"  
+  // [ , , , , ]
+  imagePath = "https://quickchart.io/chart?c={type:'bar',data:{labels:[OP,MP,MoP,SP,N,SN,MoN,MN,ON],datasets:[{label:'Users',data:" + this.dataString + "}]}}";
+
+  ngOnChanges(){
+    this.parsedAggregation = JSON.parse(this.recievedAggregationData)
+    console.log(this.parsedAggregation);
+    this.imagePath = "https://quickchart.io/chart?c={type:'bar',data:{labels:[OP,MP,MoP,SP,N,SN,MoN,MN,ON],datasets:[{label:'Users',data:" + this.dataString + "}]}}";
+    
+  }
+
   constructor() { }
 
   ngOnInit(): void {

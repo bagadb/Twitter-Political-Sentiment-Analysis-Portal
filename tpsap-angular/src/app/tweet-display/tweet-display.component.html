@@ -1,4 +1,4 @@
-<div [ngClass]="fullView ? 'maindiv overflowdiv': 'maindiv'" class="container-fluid  maindiv">
+<div [ngClass]="fullView ? 'maindiv overflowdiv resultstable': 'maindiv'" class="container-fluid  maindiv ">
     <div class="row">
         <div class="col-10">
             <h3>Report</h3>
@@ -6,8 +6,16 @@
         <div class="col-2 text-center my-auto">
             <button class="btn buttonclass" (click)="panelView()">{{buttonText}}</button>
         </div>
-        <div class="col-12 resultstable" *ngIf="fullView">
-            <p *ngFor="let tweet of stringsFromTweets" class="tweetclass">{{ tweet }}</p>
+    </div>
+    <div *ngFor="let tweet of stringsFromTweets;let i = index" class="row tweetrow">
+        <div class="col-8" *ngIf="fullView" >
+            <p class="tweetclass">{{ tweet }}</p>
+        </div>
+        <div class="col-2 classifier" *ngIf="fullView" >
+            {{ parsedClassifierData[i] }}
+        </div>
+        <div class="col-2 sentimentscore" *ngIf="fullView" >
+            {{ parsedSentiments[i] }}
         </div>
     </div>
 </div>

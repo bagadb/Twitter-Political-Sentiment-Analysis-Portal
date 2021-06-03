@@ -38,7 +38,7 @@ import { ResultsComponent } from './results/results.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [ LoginService, UserDataService, QueryService],
   bootstrap: [ AppComponent ]

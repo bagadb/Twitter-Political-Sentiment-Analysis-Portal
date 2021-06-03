@@ -20,6 +20,17 @@ export class QueryService {
         return this.http.get(this.ApiURL + "/" + encodedString, { responseType: "text" })
     }
 
+    gatherSentimentScores(){
+        return this.http.get("http://localhost:" + this.port + "/sentimentscores", { responseType: "text" })
+    }
+
+    gatherClassifierScores(){
+        return this.http.get("http://localhost:" + 5000 + "/predict", { responseType: "text" })
+    }
+
+    gatherAggregationdata(){
+        return this.http.get("http://localhost:" + 8080 + "/visualization/aggregation", { responseType: "text" })
+    }
     constructor(private http: HttpClient) {
 
     }

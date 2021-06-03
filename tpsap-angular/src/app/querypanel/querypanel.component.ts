@@ -28,11 +28,30 @@ export class QuerypanelComponent implements OnInit {
   
   tweetsJSON = '[ "No Tweets Scraped Yet" ]';
 
-  @Output() messageTweetsJSON = new EventEmitter<any>();
+  sentimentScores = "[ 0 ]";
 
-  sendToDisplayComponent(){
-    this.messageTweetsJSON.emit(this.tweetsJSON);
+  classifierScores = '"["Non-Political"]" ';
+
+  aggregationData = "{}";
+  
+  gatherSentimentScores() {
+    this.QueryService.gatherSentimentScores().subscribe( data => {
+      this.sentimentScores = data;
+    })
   }
+
+  gatherClassifierScores() {
+    this.QueryService.gatherClassifierScores().subscribe( data => {
+      this.classifierScores = data;
+    })
+  }
+
+  gatherAggregationData() {
+    this.QueryService.gatherAggregationdata().subscribe( data => {
+      this.aggregationData = data;
+    })
+  }
+
 
   fireQuery(){
 
@@ -52,9 +71,7 @@ export class QuerypanelComponent implements OnInit {
     this.QueryService.fireQueryandgetResponse(stringifiedObject).subscribe( data => {
     
       this.tweetsJSON = data;
-      //console.log(this.tweetsJSON);
-      this.sendToDisplayComponent();
-    
+
   });
   }
 

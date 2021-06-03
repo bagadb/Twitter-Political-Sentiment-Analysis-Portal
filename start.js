@@ -166,9 +166,6 @@ dealer.get('/adminfunctions/add/:usernameb64-:passwordb64', (req, res) => {
     if (error) {
       console.log(error);
 
-      res.send("Adding '" + SelectedUser + "' with password '" + SelectedPassword + "'");
-      res.status(200).end();
-    
     } else {
     
       res.send("Adding '" + SelectedUser + "' with password '" + SelectedPassword + "'");
@@ -226,6 +223,133 @@ dealer.get('/queryprocessor/:queryslug',(req, res) => {
   })
 })
 
+dealer.get('/sentimentscores',(req,res)=>{
+
+  exec("python3 ./python-scripts/sentiment.py", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(stdout);
+
+    let rawdata = fs.readFileSync('sentimentscores.json');
+    
+    let sentimentscores = JSON.parse(rawdata);
+  
+    res.send(JSON.stringify(sentimentscores));
+    
+    res.end(200);
+  })
+
+})
+
+dealer.get('/visualization/aggregation',(req,res)=>{
+  exec("python3 ./python-scripts/aggregation.py", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(stdout);
+
+    let rawdata = fs.readFileSync('aggregation.json');
+    
+    let aggregationData = JSON.parse(rawdata);
+  
+    res.send(JSON.stringify(aggregationData));
+    
+    res.end(200);
+  })
+})
+
+
+// HISTORY MANAGER GET HISTORY, ADD TO HISTORY, CLEAR HISTORY, GET USER HISTORY
+
+dealer.get('/history/:userslug',(req,res)=>{
+
+})
+
+dealer.get('/history/clear',(req,res)=>{
+  
+})
+
+dealer.post('/history/add/',(req,res)=>{
+  
+})
+
+// History Functions
+
+const historySchema = new mongoose.Schema({
+  username: String,
+  queryString: String,
+  results: String
+});
+
+const record = mongoose.model('userhistory', historySchema);
+
+/*
+*/
+
+function getHistory (username) {
+  if(username === "admin"){
+    record.find({}).then(function(){
+      console.log("Data deleted"); // Success
+    }).catch(function(error){
+      console.log(error); // Failure
+    });
+  } else {
+    record.find({ username: username }).then(function(){
+      console.log("Data deleted"); // Success
+    }).catch(function(error){
+      console.log(error); // Failure
+    });
+  }
+}
+
+
+function addToHistory(username, queryString, Results){
+  
+  var newRecord = new record ({
+    username: username,
+    queryString: queryString,
+    results: Results,
+  })
+
+  newRecord.save((error, data) => {
+    if (error) {
+      console.log(error);
+      res.status(200).end();
+
+    } else {
+      console.log(queryString + "Noted in history!");
+      res.status(200).end();
+    }
+  })
+}
+
+function clearHistory(username){
+
+  if(username === "admin"){
+    record.deleteMany({}).then(function(){
+      console.log("Data deleted"); // Success
+    }).catch(function(error){
+      console.log(error); // Failure
+    });
+  } else {
+    record.deleteMany({ username: username }).then(function(){
+      console.log("Data deleted"); // Success
+    }).catch(function(error){
+      console.log(error); // Failure
+    });
+  }
+}
 
 // SERVER 
 
