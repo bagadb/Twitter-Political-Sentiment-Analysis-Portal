@@ -3,7 +3,7 @@ const bodyparser = require("body-parser");
 const mongoose = require('mongoose');
 
 const { exec } = require("child_process");
-
+var fs = require('fs');
 
 // app_user
 // tpsappassword
@@ -13,7 +13,8 @@ mongodbUri = "mongodb+srv://app_user:tpsappassword@tpsapcluster.ivxco.mongodb.ne
 const dealer = express();
 const port = 8080
 const root = { root: __dirname }
-const path = require('path')
+const path = require('path');
+const { json } = require("body-parser");
 
 console.log("Starting Backend Server!!");
 mongoose.connect(mongodbUri, {useNewUrlParser: true, useUnifiedTopology: true });
@@ -185,15 +186,26 @@ dealer.get('/queryprocessor/:queryslug',(req, res) => {
   console.log("Someone sent a query!");
  
   var queryString = Buffer.from(req.params.queryslug, 'base64').toString();
-
-  console.log(queryString);
-
+  
   var queryObject = JSON.parse(queryString);
 
+  var numberOfTweets = queryObject.queryAmount;
 
+  var typeOfQuery = queryObject.queryType;
 
+  var stringOfQuery = queryObject.queryString;
 
-  exec("python3 ./python-scripts/scraping.py",{env: {...process.env}}, (error, stdout, stderr) => {
+  querytypeDict = {
+    "keyword" : 0,
+    "hashtag" : 1,
+    "username": 2
+  }
+
+  console.log("Executing n:" + numberOfTweets + " t:" + querytypeDict[typeOfQuery] + " s:" + stringOfQuery);
+
+  scriptArguments = numberOfTweets + " " + querytypeDict[typeOfQuery] + " " + stringOfQuery
+  
+  exec("python3 ./python-scripts/scraping.py " + scriptArguments, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -202,17 +214,23 @@ dealer.get('/queryprocessor/:queryslug',(req, res) => {
         console.log(`stderr: ${stderr}`);
         return;
     }
-    console.log(`stdout: ${stdout}`);
-  })
+    let rawdata = fs.readFileSync('tweets.json');
   
-  res.send("QUERY OK");
-  res.status(200).end();
+    let downloadedTweets = JSON.parse(rawdata);
 
+    tweets = JSON.stringify(downloadedTweets);
+
+    res.send(tweets);
+    res.end(200);
+
+  })
 })
 
 
 // SERVER 
 
 dealer.listen(port, () => {
-  console.log(`API Started at http://localhost:${port}`)
-})
+
+  console.log(`API Started at http://localhost:${port}`);
+
+});

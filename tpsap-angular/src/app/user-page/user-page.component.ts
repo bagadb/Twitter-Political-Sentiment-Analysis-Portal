@@ -14,13 +14,19 @@ export class UserPageComponent implements OnInit {
 
   listOfTabs = [ "Query Panel" , "Query History" ];
 
-
+  
   selectedTab = 0;
-
+  
   switchTab(tabNumber){
     this.selectedTab = tabNumber;
   }
+  
+  tweetsJSON: any;
 
+  sendTweetsToDisplay($event) {
+    this.tweetsJSON = $event;
+  }
+  
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       this.loggedInUser = params['username'];
@@ -29,8 +35,9 @@ export class UserPageComponent implements OnInit {
         this.listOfTabs = [ "Query Panel" , "Query History" , "Admin Panel" ];
       }
     });
-   }
-
+  }
+  
+  
   ngOnInit(): void {
   }
 

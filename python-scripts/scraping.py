@@ -17,7 +17,7 @@ import pandas as pd
 
 #Keys for Authentication
 
-f = open('../../keys.json')
+f = open('../keys.json')
 
 keys = json.load(f)
 
@@ -87,7 +87,11 @@ for tweet in tweets:
     print(tweet)
     print("\n")
 
+print("---------------------------------------------------------------------------")
+
 #DataFrame stores data gathered
 
 df = pd.DataFrame({"text" : tweets})
+
 df.to_csv("tweets.tsv", sep="\t",index=False)
+df.to_json("tweets.json", orient='values')

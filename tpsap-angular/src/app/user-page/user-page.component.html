@@ -10,25 +10,12 @@
             href="javascript:void(0)">
                 {{ tab  }}</a>
         </li>
-        <!--
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Admin Panel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Query Panel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Query History</a>
-            </li>
-            <li class="nav-item pull-right">
-                <a class="nav-link" href="#">Log Out</a>
-            </li>
-        -->
       </ul>
     </div>
   </nav>
 <h1>You are logged in as <span class="header-text">{{loggedInUser}}</span></h1>
 <div class="container-fluid">
     <app-adminpanel *ngIf="selectedTab == 2" class="row adminpanel"></app-adminpanel><br>
-    <app-querypanel *ngIf="selectedTab == 0" class="row querypanel"></app-querypanel>
+    <app-querypanel (messageTweetsJSON)="sendTweetsToDisplay($event)" *ngIf="selectedTab == 0" class="row querypanel" >
+    </app-querypanel>
 </div>

@@ -1,15 +1,17 @@
 import { query } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Input, Output, EventEmitter, Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { QueryService } from './queryservice.service'
+import { QueryService } from './queryservice.service';
+
 
 @Component({
   selector: 'app-querypanel',
   templateUrl: './querypanel.component.html',
   styleUrls: ['./querypanel.component.css']
 })
+
 export class QuerypanelComponent implements OnInit {
 
   queryString = new FormControl('Modi');
@@ -23,8 +25,14 @@ export class QuerypanelComponent implements OnInit {
   advancedOptionsRevealer(){
     this.advancedOptionsShow = !this.advancedOptionsShow;
   }
+  
+  tweetsJSON = '[ "No Tweets Scraped Yet" ]';
 
-  result: any;
+  @Output() messageTweetsJSON = new EventEmitter<any>();
+
+  sendToDisplayComponent(){
+    this.messageTweetsJSON.emit(this.tweetsJSON);
+  }
 
   fireQuery(){
 
@@ -43,7 +51,9 @@ export class QuerypanelComponent implements OnInit {
 
     this.QueryService.fireQueryandgetResponse(stringifiedObject).subscribe( data => {
     
-    console.log(queryStringFinal);
+      this.tweetsJSON = data;
+      //console.log(this.tweetsJSON);
+      this.sendToDisplayComponent();
     
   });
   }
