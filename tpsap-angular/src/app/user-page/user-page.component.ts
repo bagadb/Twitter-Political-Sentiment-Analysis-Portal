@@ -12,7 +12,7 @@ export class UserPageComponent implements OnInit {
   AdminLogin = false;
   loggedInUser: String;
 
-  listOfTabs = [ "Query Panel" , "Query History" ];
+  listOfTabs = [ "Query Panel" ];
 
   
   selectedTab = 0;
@@ -32,7 +32,7 @@ export class UserPageComponent implements OnInit {
       this.loggedInUser = params['username'];
       if (this.loggedInUser == "admin"){
         this.AdminLogin = true;
-        this.listOfTabs = [ "Query Panel" , "Query History" , "Admin Panel" ];
+        this.listOfTabs = [ "Query Panel" , "Admin Panel" ];
       }
     });
   }

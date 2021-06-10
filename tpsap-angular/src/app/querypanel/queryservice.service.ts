@@ -31,6 +31,10 @@ export class QueryService {
     gatherAggregationdata(){
         return this.http.get("http://localhost:" + 8080 + "/visualization/aggregation", { responseType: "text" })
     }
+
+    gatherPieChartdata(){
+        return this.http.get("http://localhost:" + 8080 + "/visualization/piechart", { responseType: "text" })
+    }
     constructor(private http: HttpClient) {
 
     }

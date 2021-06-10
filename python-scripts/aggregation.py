@@ -24,9 +24,11 @@ mdrt_ngt = 0
 mst_ngt = 0
 ovwhm_ngt = 0
 
-f = open('./sentimentscores.json',)
+f = open('./jsondata/sentimentscores.json',)
 
 data=json.load(f)
+
+f.close()
 
 arrayOfSentimentScores = []
 
@@ -67,10 +69,33 @@ aggregationData["ovwhm_ngt"] = ovwhm_ngt
 
 print(aggregationData)
 
-with open('../aggregation.json', 'w') as json_file:
+with open('jsondata/aggregation.json', 'w') as json_file:
   json.dump(aggregationData, json_file)
 
 json_file.close()
 
-     
+f = open('./jsondata/classifierscores.json',)
+
+data=json.load(f)
+
+arrayOfClassifierScores = []
+
+pieChartData = {
+    "pol" : 0,
+    "nonpol" : 0
+}
+
+
+for i in data:
+    if i == "Political":
+        pieChartData["pol"] += 1
+    else:
+        pieChartData["nonpol"] += 1       
+
+print(pieChartData)
+
+with open('jsondata/polnonpol.json', 'w') as json_file:
+  json.dump(pieChartData, json_file)
+
+json_file.close()
 

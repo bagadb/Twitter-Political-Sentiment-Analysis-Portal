@@ -18,6 +18,8 @@ import { QueryService } from './querypanel/queryservice.service';
 import { TweetDisplayComponent } from './tweet-display/tweet-display.component';
 import { ResultsComponent } from './results/results.component';
 
+import { ChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { ResultsComponent } from './results/results.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChartsModule
   ],
   providers: [ LoginService, UserDataService, QueryService],
   bootstrap: [ AppComponent ]

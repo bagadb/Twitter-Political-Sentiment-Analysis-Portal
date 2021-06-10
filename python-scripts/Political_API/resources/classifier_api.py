@@ -11,7 +11,7 @@ class Classifier(Resource):
     _classifier= PoliticalTweetClassifier()
 
     def get(self):
-        f = open('../../tweets.json',)
+        f = open('../../jsondata/tweets.json',)
 
         data=json.load(f)
 
@@ -23,7 +23,7 @@ class Classifier(Resource):
         for i in arrayofClassifierScores:
             print(i)
         
-        with open('../../classifierscores.json', 'w') as json_file:
+        with open('../../jsondata/classifierscores.json', 'w') as json_file:
             json.dump(arrayofClassifierScores, json_file)
         
         

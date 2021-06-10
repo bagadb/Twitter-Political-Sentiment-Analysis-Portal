@@ -1,7 +1,7 @@
 #
-# scraping.py number-of-tweets query-type(keyword,hashtag,username) query-string
+# scraping.py number-of-tweets query-type(keyword,hashtag,username) exclude-retweets? query-string
 # 0 = keyword 1 = hashtag 2 = username
-#
+# 0 = dont exclude, 1 = exclude
 #
 #
 #
@@ -41,6 +41,8 @@ number_of_tweets = sys.argv[1]
 
 query_type = int(sys.argv[2])
 
+exclude_retweets = sys.argv[4]
+
 query_string = sys.argv[3]
 
 def query_dictionary(query_number):
@@ -67,13 +69,30 @@ print("-------------------------------------------------------------------------
 
 if query_type == 0:
     #API CALL FOR KEYWORD METHOD
+    if exclude_retweets == "1":
+        query_string += " -filter:retweets"
     cursor= tweepy.Cursor(api.search, q=query_string,tweet_mode="extended", lang = 'en').items(int(number_of_tweets))
 elif query_type == 1:
     #API CALL FOR HASHTAG METHOD
+    if exclude_retweets == "1":
+        query_string += " -filter:retweets"
     cursor= tweepy.Cursor(api.search, q= "#" + query_string ,tweet_mode="extended", lang = 'en').items(int(number_of_tweets))
 elif query_type == 2:
     #API CALL FOR USERNAME METHOD
-    cursor = tweepy.Cursor(api.user_timeline, id=query_string,tweet_mode="extended").items(int(number_of_tweets))
+    if exclude_retweets == "1":
+        cursor = tweepy.Cursor(api.user_timeline,
+                        screen_name=query_string, 
+                        count=None,
+                        since_id=None,
+                        max_id=None,
+                        trim_user=True,
+                        exclude_replies=True,
+                        contributor_details=False,
+                        include_entities=False,
+                        tweet_mode="extended"
+                        ).items(int(number_of_tweets))
+    else:
+        cursor = tweepy.Cursor(api.user_timeline, id=query_string,tweet_mode="extended").items(int(number_of_tweets))
 
 
 #Store Tweets in Dataframe and then to tsv file
@@ -93,5 +112,5 @@ print("-------------------------------------------------------------------------
 
 df = pd.DataFrame({"text" : tweets})
 
-df.to_csv("tweets.tsv", sep="\t",index=False)
-df.to_json("tweets.json", orient='values')
+#df.to_csv("tweets.tsv", sep="\t",index=False)
+df.to_json("jsondata/tweets.json", orient='values')

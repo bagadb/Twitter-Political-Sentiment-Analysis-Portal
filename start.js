@@ -192,15 +192,24 @@ dealer.get('/queryprocessor/:queryslug',(req, res) => {
 
   var stringOfQuery = queryObject.queryString;
 
+  var excludeRetweets = 0;
+
+  if( queryObject.queryXRT == true ){
+    var excludeRetweets = 1;
+  }else{
+    var excludeRetweets = 0;
+  }
+
   querytypeDict = {
     "keyword" : 0,
     "hashtag" : 1,
     "username": 2
   }
 
-  console.log("Executing n:" + numberOfTweets + " t:" + querytypeDict[typeOfQuery] + " s:" + stringOfQuery);
+  console.log("Executing n:" + numberOfTweets + " t:" + querytypeDict[typeOfQuery] + " s:" + stringOfQuery
+  + " RT:" + excludeRetweets) ;
 
-  scriptArguments = numberOfTweets + " " + querytypeDict[typeOfQuery] + " " + stringOfQuery
+  scriptArguments = numberOfTweets + " " + querytypeDict[typeOfQuery] + " " + stringOfQuery + " " + excludeRetweets;
   
   exec("python3 ./python-scripts/scraping.py " + scriptArguments, (error, stdout, stderr) => {
     if (error) {
@@ -210,8 +219,8 @@ dealer.get('/queryprocessor/:queryslug',(req, res) => {
     if (stderr) {
         console.log(`stderr: ${stderr}`);
         return;
-    }
-    let rawdata = fs.readFileSync('tweets.json');
+    }   
+    let rawdata = fs.readFileSync('jsondata/tweets.json');
   
     let downloadedTweets = JSON.parse(rawdata);
 
@@ -236,7 +245,7 @@ dealer.get('/sentimentscores',(req,res)=>{
     }
     console.log(stdout);
 
-    let rawdata = fs.readFileSync('sentimentscores.json');
+    let rawdata = fs.readFileSync('jsondata/sentimentscores.json');
     
     let sentimentscores = JSON.parse(rawdata);
   
@@ -259,7 +268,7 @@ dealer.get('/visualization/aggregation',(req,res)=>{
     }
     console.log(stdout);
 
-    let rawdata = fs.readFileSync('aggregation.json');
+    let rawdata = fs.readFileSync('jsondata/aggregation.json');
     
     let aggregationData = JSON.parse(rawdata);
   
@@ -270,18 +279,15 @@ dealer.get('/visualization/aggregation',(req,res)=>{
 })
 
 
-// HISTORY MANAGER GET HISTORY, ADD TO HISTORY, CLEAR HISTORY, GET USER HISTORY
+dealer.get('/visualization/piechart',(req,res)=>{
 
-dealer.get('/history/:userslug',(req,res)=>{
-
-})
-
-dealer.get('/history/clear',(req,res)=>{
+    let rawdata = fs.readFileSync('jsondata/polnonpol.json');
+    
+    let aggregationData = JSON.parse(rawdata);
   
-})
-
-dealer.post('/history/add/',(req,res)=>{
-  
+    res.send(JSON.stringify(aggregationData));
+    
+    res.end(200);
 })
 
 // History Functions
@@ -336,6 +342,8 @@ function addToHistory(username, queryString, Results){
 
 function clearHistory(username){
 
+  console.log("History Cleared!");
+
   if(username === "admin"){
     record.deleteMany({}).then(function(){
       console.log("Data deleted"); // Success
@@ -350,6 +358,21 @@ function clearHistory(username){
     });
   }
 }
+
+
+// HISTORY MANAGER GET HISTORY, ADD TO HISTORY, CLEAR HISTORY, GET USER HISTORY
+
+dealer.get('/history/:userslug',(req,res)=>{
+
+})
+
+dealer.get('/history/clear',(req,res)=>{
+  
+})
+
+dealer.post('/history/add/',(req,res)=>{
+  
+})
 
 // SERVER 
 

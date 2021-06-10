@@ -21,7 +21,7 @@ def calculate_sentiment(comment):
 # Takes JSON array of tweets
 # Outputs JSON array of sentiment scores
 
-f = open('./tweets.json',)
+f = open('./jsondata/tweets.json',)
 
 data=json.load(f)
 
@@ -33,7 +33,7 @@ for i in data:
 for i in arrayOfSentimentScores:
     print(i)
 
-with open('./sentimentscores.json', 'w') as json_file:
+with open('./jsondata/sentimentscores.json', 'w') as json_file:
   json.dump(arrayOfSentimentScores, json_file)
 
 json_file.close()

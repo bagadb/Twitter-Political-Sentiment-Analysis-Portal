@@ -25,7 +25,10 @@
         <label for="hashtag">Hashtag</label> &nbsp;
         
         <input type="radio" id="username" name="queryType" formControlName="queryType" value="username">
-        <label for="hashtag">Username(@)</label><br>
+        <label for="username">Username(@)</label><br>
+
+        <input type="checkbox" id="checkbox-1" name="excludeRetweet" formControlName="excludeRetweet" value="value-1">
+        <label for="checkbox-1">Exclude Retweets</label><br>
 
         Number of Tweets to scrape:
         <input formControlName="queryAmount" type="number">
@@ -45,10 +48,10 @@
     <button class="btn buttonclass btn-primary" (click)="gatherClassifierScores()">
         Classify Political / Non-Political
     </button>&nbsp;
-    <button class="btn buttonclass btn-primary" (click)="gatherAggregationData()">
+    <button class="btn buttonclass btn-primary" (click)="renderVisualization()">
         Render Visualization
     </button>
 </div>
 <div class="col-12">
-    <app-results [(recievedAggregationData)]="aggregationData"></app-results>
+    <app-results [(recievedPieChartData)]="pieChartData" [(recievedAggregationData)]="aggregationData"></app-results>
 </div>

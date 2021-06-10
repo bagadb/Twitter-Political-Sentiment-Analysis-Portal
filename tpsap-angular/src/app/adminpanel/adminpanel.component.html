@@ -8,15 +8,19 @@
             <th scope="col">
               <button type="button" class="buttonclass btn btn-primary" (click)="getUserData()">
               Refresh
-              </button></th>
+              </button>&nbsp;
+              <button type="button" class="buttonclass btn btn-primary" (click)="togglePasswordVisibility()">
+                Show/Hide Passwords
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of listOfUsers; let i = index">
             <th scope="row" >{{i+1}}</th>
-            <td>{{user.username}}</td>
+              <td>{{user.username}}</td>
             <td class="passwordclass">
-                {{user.password}}
+                <input [type]="passwordVisibility? 'text' : 'password'" [value]="user.password">
             </td>
             <td>
                 <button type="button" class="buttonclass btn btn-primary" (click)="deleteUserData(user.username)">

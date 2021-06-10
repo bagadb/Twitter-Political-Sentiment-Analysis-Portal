@@ -13,10 +13,15 @@ export class AdminpanelComponent implements OnInit {
   listOfUsers: any;
   numberOfUsers = 0;
 
+  passwordVisibility = false;
+
   newUsername = new FormControl('');
   
   newPassword = new FormControl('');
 
+  togglePasswordVisibility(){
+    this.passwordVisibility = !this.passwordVisibility;
+  }
 
   getUserData(){
     this.UserDataService.getUserData().subscribe( data => {

@@ -18,7 +18,8 @@ export class QuerypanelComponent implements OnInit {
 
   advancedFormGroup = new FormGroup({
     queryType: new FormControl('keyword'),
-    queryAmount: new FormControl('10')
+    queryAmount: new FormControl('10'),
+    excludeRetweet: new FormControl(false)
   });
   advancedOptionsShow = false;
 
@@ -33,6 +34,8 @@ export class QuerypanelComponent implements OnInit {
   classifierScores = '"["Non-Political"]" ';
 
   aggregationData = "{}";
+
+  pieChartData = "{}"
   
   gatherSentimentScores() {
     this.QueryService.gatherSentimentScores().subscribe( data => {
@@ -52,6 +55,17 @@ export class QuerypanelComponent implements OnInit {
     })
   }
 
+  gatherPieChartData() {
+    this.QueryService.gatherPieChartdata().subscribe(data => {
+      this.pieChartData = data;
+      console.log(data);
+    })
+  }
+
+  renderVisualization(){
+    this.gatherAggregationData();
+    this.gatherPieChartData();
+  }
 
   fireQuery(){
 
@@ -63,7 +77,8 @@ export class QuerypanelComponent implements OnInit {
     var queryObject = {
       queryString: this.queryString.value,
       queryType: this.advancedFormGroup.get('queryType').value,
-      queryAmount: this.advancedFormGroup.get('queryAmount').value
+      queryAmount: this.advancedFormGroup.get('queryAmount').value,
+      queryXRT: this.advancedFormGroup.get('excludeRetweet').value
     }
 
     var stringifiedObject = JSON.stringify(queryObject);

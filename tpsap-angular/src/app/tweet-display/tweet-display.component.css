@@ -41,3 +41,33 @@
 .resultstable {
     height: 500px;
 }
+
+.classifier {
+    background-color: #bfbfbf;
+    margin-bottom: 5px;
+}
+
+.political-class {
+    background-color: lightblue;
+}
+
+.nonpol-class {
+    background-color: palegoldenrod;
+}
+
+.sentiment-score {
+    background-color: #bfbfbf;
+    margin-bottom: 5px;
+}
+
+.positive-class {
+    background-color: lightgreen;
+}
+
+.negative-class {
+    background-color: lightsalmon;
+}
+
+.neutral-class {
+    background-color: lightgrey;
+}

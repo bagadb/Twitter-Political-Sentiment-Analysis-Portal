@@ -11,10 +11,12 @@
         <div class="col-8" *ngIf="fullView" >
             <p class="tweetclass">{{ tweet }}</p>
         </div>
-        <div class="col-2 classifier" *ngIf="fullView" >
+        <div class="col-2 classifier" *ngIf="fullView" 
+            [ngClass]="parsedClassifierData[i] === 'Political' ? 'political-class' : 'nonpol-class' " >
             {{ parsedClassifierData[i] }}
         </div>
-        <div class="col-2 sentimentscore" *ngIf="fullView" >
+        <div class="col-2 sentiment-score" *ngIf="fullView"
+        [ngClass]="parsedSentiments[i] === 0 ? 'neutral-class' : parsedSentiments[i] > 0 ? 'positive-class' : 'negative-class' " >
             {{ parsedSentiments[i] }}
         </div>
     </div>

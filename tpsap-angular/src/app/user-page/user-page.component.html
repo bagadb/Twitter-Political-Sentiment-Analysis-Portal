@@ -15,7 +15,7 @@
   </nav>
 <h1>You are logged in as <span class="header-text">{{loggedInUser}}</span></h1>
 <div class="container-fluid">
-    <app-adminpanel *ngIf="selectedTab == 2" class="row adminpanel"></app-adminpanel><br>
+    <app-adminpanel *ngIf="selectedTab == 1" class="row adminpanel"></app-adminpanel><br>
     <app-querypanel (messageTweetsJSON)="sendTweetsToDisplay($event)" *ngIf="selectedTab == 0" class="row querypanel" >
     </app-querypanel>
 </div>
