@@ -13,6 +13,15 @@ To Install and Run
 4. run npm install in project folder as well as inside tpsap-angular
 
 5. Create a keys.json file, Just outside the Project Directory to store personal tweepy keys for the program to run
+like below..
+
+{
+    "TPSAP_CK": * CONSUMER KEY HERE * ,
+    "TPSAP_CS": * CONSUMER SECRET HERE *,
+    "TPSAP_AT": * ACCESS TOKEN HERE *,
+    "TPSAP_AS": * ACCESS SECRET HERE *
+}
+
 
 5. node start.js
 
