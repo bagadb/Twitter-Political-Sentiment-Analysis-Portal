@@ -25,6 +25,10 @@ like below..
 
 5. node start.js
 
+6. go to python-scripts/Political_API/ and run "python3 app.py"
+
+7. go to tpsap-angular and run ng serve
+
 Open http://localhost:8080/ in browser
 
 ```
